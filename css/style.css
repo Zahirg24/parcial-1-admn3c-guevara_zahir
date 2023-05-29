@@ -1,0 +1,79 @@
+body {
+    background-image: url("../img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Rubik', sans-serif;
+  }
+
+#app { 
+    margin-left: 8rem;
+    margin-right: 8rem;
+    margin-top: 5rem;
+background: rgba(255, 255, 255, 0.27);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.3px);
+-webkit-backdrop-filter: blur(7.3px);
+border: 1px solid rgba(255, 255, 255, 1);
+}
+
+h1 {
+    text-align: center;
+    padding: 2rem;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 10rem;
+}
+
+.botonCal {
+    text-align: center;
+    padding: auto;
+    margin-top: 1rem;
+
+}
+button {
+    background-color: rgb(161, 8, 77);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background-color: rgb(0, 0, 0);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 0.2rem;
+  }
+
+  .texTotal {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+background-color: antiquewhite;
+text-align: center;
+margin-top: 1rem;
+margin-bottom: 1rem;
+  }
+
+  footer {
+    text-align: center;
+  }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dividir gastos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+  <script src="https://unpkg.com/vue@next"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+  <div id="app">
+    <h1>Divide la cuenta con amigos!</h1>
+    <form @submit.prevent="calcularDivision">
+      <div>
+        <label for="total">Total de gastos:</label>
+        <input type="number" v-model.number="total" id="total">
+      </div>
+      <div v-for="(persona, index) in grupoPersonas" :key="index">
+        <label :for="'name' + index">Nombre {{ index + 1 }}:</label>
+        <input type="text" v-model="persona.name" :id="'name' + index">
+      </div>
+      <div class="botonCal">
+      <button type="submit" :style="submitButtonStyle">Calcular cuenta!</button>
+    </div>
+    </form>
+    <div class="texTotal" v-if="divididoListo">
+      <h2>Total:</h2>
+      <persona v-for="(persona, index) in grupoPersonas" :key="index" :persona="persona" :cantidadporpersona="cantidadporpersona"></persona>
+    </div>
+  </div>
+
+  <script>
+    const Persona = {
+      functional: true,
+      props: ['persona', 'cantidadporpersona'],
+      template: `
+        <div>
+          <p>{{ persona.name }} debe pagar: {{ cantidadporpersona }}</p>
+        </div>
+      `
+    };
+
+    const app = Vue.createApp({
+      data() {
+        return {
+          total: 0,
+          numDePersonas: 4,
+          grupoPersonas: [
+            { name: '' },
+            { name: '' },
+            { name: '' },
+            { name: '' }
+          ],
+          divididoListo: false
+        };
+      },
+      computed: {
+        cantidadporpersona() {
+          if (this.total === 0 || this.numDePersonas === 0) {
+            return 0;
+          }
+          return (this.total / this.numDePersonas).toFixed(2);
+        }
+      },
+      submitButtonStyle() {
+          return {
+            backgroundColor: this.total > 0 && this.grupoPersonas.every(persona => persona.name !== '') ? 'green' : 'red',
+            color: 'white'
+          };
+        },
+      methods: {
+        calcularDivision() {
+          if (this.total === 0) {
+            alert('Por favor ingresar el monto total para poder calcular!.');
+            return;
+          }
+          if (this.grupoPersonas.some(persona => persona.name === '')) {
+            alert('Ingresa todos los integrantes!.');
+            return;
+          }
+          this.numDePersonas = this.grupoPersonas.length;
+          this.divididoListo = true;
+     
+        }
+      }
+    });
+  
+    app.component('persona', Persona);
+    app.mount('#app');
+  </script>
+
+  <footer>
+    <h2> Zahir Guevara | Aplicaciones para Dispositivos Móviles</h2>
+  </footer>
+</body>
+</html>
